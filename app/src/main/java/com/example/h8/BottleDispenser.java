@@ -35,9 +35,8 @@ public class BottleDispenser {
         return BD;
     }
 
-    public void addMoney(TextView textView) {
-        money += 1;
-        textView.setText("Klink! Added more money!");
+    public void addMoney(int barValue) {
+        money = money + barValue;
     }
 
     public void buyBottle(int c, TextView textView) {

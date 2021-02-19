@@ -1,11 +1,12 @@
 package com.example.h8;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button addMon;
     Button returnMon;
     Button buy;
+    SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,32 +25,45 @@ public class MainActivity extends AppCompatActivity {
         addMon = (Button) findViewById(R.id.addMon);
         returnMon = (Button) findViewById(R.id.returnMon);
         buy = (Button) findViewById(R.id.buy);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
 
         BottleDispenser BD = BottleDispenser.getInstance();
 
-        addMon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BD.addMoney(textView);
-            }
+        addMon.setOnClickListener(v -> {
+            int  barValue= seekBar.getProgress();
+            BD.addMoney(barValue);
+            resetSeekBar(v);
+            textView.setText("Klink! Added more money!");
         });
 
-        returnMon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BD.returnMoney(textView);
-            }
+        returnMon.setOnClickListener(v -> BD.returnMoney(textView));
+
+        buy.setOnClickListener(v -> {
+            BD.listBottles(textView);
+            BD.buyBottle(1, textView);
+            BD.listBottles(textView);
         });
 
-        buy.setOnClickListener(new View.OnClickListener() {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                BD.listBottles(textView);
-                BD.buyBottle(1, textView);
-                BD.listBottles(textView);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int seekBarValue= seekBar.getProgress();
+                String prog = "Press Add Money to add amount of: " + seekBarValue;
+                textView.setText(prog);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
-
-
+    }
+    public void resetSeekBar(View v) {
+        seekBar.setProgress(0);
     }
 }
