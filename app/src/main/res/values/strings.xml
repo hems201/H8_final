@@ -3,6 +3,7 @@
     <string name="buy">Buy</string>
     <string name="add_money">Add Money</string>
     <string name="return_money">Return Money</string>
-    <string name="sceen">this is the sceen</string>
+    <string name="screen">this is the screen</string>
     <string name="reset_bar">Reset Bar</string>
+    <string name="receipt">Receipt</string>
 </resources>

@@ -5,29 +5,30 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-//muutetaan array arraylistiks että voidaan poistaa pulloja helpommin
 public class BottleDispenser {
     private int bottles;
     // The array for the Bottle-objects
-    private ArrayList<Bottle> bottle_array;
+    private final ArrayList<Bottle> bottle_array;
     private float money;
-    private String name,m;
-    private double price;
+    private Bottle last_bottle;
 
     //singleton:
-    private static BottleDispenser BD = new BottleDispenser();
+    private static final BottleDispenser BD = new BottleDispenser();
 
     private BottleDispenser() {
-        bottles = 5;
+        bottles = 8;
         money = 0;
 
-        bottle_array = new ArrayList<Bottle>();
+        bottle_array = new ArrayList<>();
 
         bottle_array.add(new Bottle());
         bottle_array.add(new Bottle("Pepsi Max", 1.5, 2.2));
-        bottle_array.add(new Bottle("Coca-Cola Zero", 0.5, 2.0));
-        bottle_array.add(new Bottle("Coca-Cola Zero", 1.5, 2.5));
+        bottle_array.add(new Bottle("Coca-Cola Zero", 0.5, 3.0));
+        bottle_array.add(new Bottle("Coca-Cola Zero", 2.5, 4.5));
+        bottle_array.add(new Bottle("Coca-Cola", 0.5, 2.0));
+        bottle_array.add(new Bottle("Coca-Cola", 1.5, 2.5));
         bottle_array.add(new Bottle("Fanta Zero", 0.5, 1.95));
+        bottle_array.add(new Bottle("Fanta Zero", 1, 3.5));
     }
 
     //singleton:
@@ -39,21 +40,25 @@ public class BottleDispenser {
         money = money + barValue;
     }
 
-    public void buyBottle(int c, TextView textView) {
-        price = bottle_array.get(c -1).getPrice();
-        name = bottle_array.get(c -1).getName();
+    public String buyBottle(int c) {
+        String s ="";
         if (bottles == 0) {
-            System.out.println("No bottles left");
-        }
-        else if (money < price) {
-            System.out.println("Add money first!");
+            s = "None left!";
         }
         else {
-            bottles -= 1;
-            money = (float) (money - price);
-
-            System.out.println("KACHUNK! " + name + " came out of the dispenser!");
+            double price = bottle_array.get(c).getPrice();
+            String name = bottle_array.get(c).getName();
+            if (money < price) {
+                s = "Add money first";
+            }
+            else {
+                bottles -= 1;
+                money = (float) (money - price);
+                s = "KACHUNK! " + name + " came out of the dispenser!";
+            }
         }
+        last_bottle = bottle_array.get(c);
+        return s;
     }
 
     public void returnMoney(TextView textView) {
@@ -61,23 +66,21 @@ public class BottleDispenser {
         DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
         dfs.setDecimalSeparator(',');
         df.setDecimalFormatSymbols(dfs);
-        m = df.format(money);
+        String m = df.format(money);
         String text = "Klink klink. Money came out! You got " + m + "€ back\n";
         textView.setText(text);
         money = 0;
     }
 
-    public void listBottles(TextView textView) {
-        String n;
-        double s,p;
-        for(int i = 0; i < bottle_array.size();i++) {
-            p = bottle_array.get(i).getPrice();
-            n = bottle_array.get(i).getName();
-            s = bottle_array.get(i).getSize();
-            System.out.println(i+1 + ". Name: " + n + "\n	Size: " + s + "	Price: " + p);
-        }
-    }
     public void deleteBottle(int choice) {
-        bottle_array.remove(choice-1);
+        bottle_array.remove(choice);
+    }
+
+    public ArrayList<Bottle> getBottle_array() {
+        return bottle_array;
+    }
+
+    public Bottle getLast_bottle() {
+        return last_bottle;
     }
 }

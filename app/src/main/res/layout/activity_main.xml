@@ -4,79 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/buy"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_width="121dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="344dp"
         android:backgroundTint="#2196F3"
         android:text="@string/buy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/returnMon"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="114dp"
         android:backgroundTint="#D13D3D"
         android:text="@string/return_money"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/receipt"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintVertical_bias="0.326" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="360dp"
-        android:layout_height="178dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/sceen"
+        android:layout_width="353dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="36dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="monospace"
+        android:text="@string/screen"
         android:textColor="#0B0A0A"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/buy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addMon"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#4CAF50"
-        android:text="@string/add_money"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buy" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
 
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="209dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
+        android:max="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addMon"
-        android:max="20"/>
+        app:layout_constraintTop_toBottomOf="@+id/addMon" />
 
     <Button
         android:id="@+id/resBar"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="124dp"
+        android:layout_height="58dp"
         android:backgroundTint="#9E9898"
         android:onClick="resetSeekBar"
         android:text="@string/reset_bar"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toEndOf="@+id/addMon"
         app:layout_constraintTop_toBottomOf="@+id/buy"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.545" />
+
+    <Button
+        android:id="@+id/addMon"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/add_money"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buy" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="393dp"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#C8D1D5"
+        android:foregroundTint="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/buy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.411" />
+
+    <Button
+        android:id="@+id/receipt"
+        android:layout_width="98dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/receipt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.319" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
